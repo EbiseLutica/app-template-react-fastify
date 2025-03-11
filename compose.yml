@@ -1,0 +1,39 @@
+services:
+  app:
+    build:
+      context: .
+    depends_on:
+      - postgres
+      - redis
+    ports:
+      - 3000:3000
+      - 5173:5173
+    environment:
+      - POSTGRES_HOST=postgres
+      - REDIS_HOST=redis
+      - DATABASE_URL=postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@db:${POSTGRES_PORT}/${POSTGRES_DB}
+    volumes:
+      - .:/app:cached
+      - node-modules:/app/node_modules
+    env_file: .env
+    init: true
+    command: sleep infinity
+  postgres:
+    image: postgres:16.2
+    ports:
+      - "5432:5432"
+    volumes:
+      - db-store:/var/lib/postgresql/data
+    env_file:
+      - .env
+  redis:
+    image: redis:6-alpine
+    volumes:
+      - redis-volume:/data
+    ports:
+      - 6379:6379
+
+volumes:
+  db-store:
+  node-modules:
+  redis-volume:

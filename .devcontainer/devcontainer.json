@@ -1,0 +1,19 @@
+{
+  "name": "app-template",
+  "dockerComposeFile": "../compose.yml",
+  "service": "app",
+  "workspaceFolder": "/app",
+  "overrideCommand": true,
+
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "Prisma.prisma",
+        "ipatalas.vscode-postfix-ts",
+        "ckolkman.vscode-postgres",
+        "ms-azuretools.vscode-docker",
+        "biomejs.biome"
+      ]
+    }
+  }
+}
